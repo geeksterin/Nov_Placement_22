@@ -17,21 +17,51 @@ var marks = [35,35,45,35,45]
 // console.log(percentages);
 
 // Polyfill for map
-function map(fn, arr){
+Array.prototype.myMap = function myMap(fn){
     let result = [];
 
-    arr.forEach((el) => {
-        var res = fn(el)
+    this.forEach((el, i) => {
+        var res = fn(el, i)
         result.push(res)
     })
     return result
 }
 
+
 var arr = [1,2,3,4,5]
-var newArr = map(function(el){
+
+var anotherArr = [2,1]
+
+// prototypal inheritance / prototype inheritance
+var newArr = arr.myMap(function(el, i){
+    console.log(i)
     return el*2
-}, arr)
+})
+
+var secondResult = anotherArr.myMap(function(el, i){
+    console.log(i)
+
+    return el*3
+})
+
+
+
+// var person = {}
+
+// person.name = "tajammul"
+// console.log(person)
+
+
+// prototype -- 
+// var newArr = arr.myMap(function(el){
+//     return el*2
+// })
+
+// var newArrUsingMap = arr.map(function(el) {
+//     return el * 2
+// })
 
 console.log(newArr);
+console.log(secondResult);
 
 // arr.map(function(){})
