@@ -28,3 +28,12 @@ div {
 header {
     font-weight: 600;
 }
+
+.todo-completed {
+    text-decoration: line-through;
+}
+
+.todo-card {
+    display: flex;
+    flex-direction: row;
+}
