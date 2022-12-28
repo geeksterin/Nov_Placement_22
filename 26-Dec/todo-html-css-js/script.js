@@ -20,6 +20,11 @@ function createTodoCard(value) {
   deleteBtn.innerText = "X";
   todoCard.appendChild(deleteBtn);
   deleteBtn.addEventListener("click", function () {
+    let todos = localStorage.getItem("todos");
+    todos = JSON.parse(todos)
+    console.log(todos)
+    todos = todos.filter(todo => todo !== value)
+    localStorage.setItem("todos", JSON.stringify(todos))
     todoCard.remove();
   });
 
@@ -50,6 +55,29 @@ function addTodo() {
     alert("Please enter a valid todo!");
   } else {
     createTodoCard(inputEl.value);
+    let todos = localStorage.getItem("todos");
+    if (todos) {
+      todos = JSON.parse(todos);
+      todos.push(inputEl.value)
+      localStorage.setItem("todos", JSON.stringify(todos))
+    } else {
+      localStorage.setItem("todos", JSON.stringify([inputEl.value]))
+    }
     inputEl.value = "";
   }
 }
+
+
+function prePopulateTodos() {
+  let todos = localStorage.getItem("todos");
+  if (todos) {
+    todos = JSON.parse(todos);
+  } else {
+    todos = [];
+  }
+
+  // ["first todo", "second todo"]
+  todos.forEach(todo => createTodoCard(todo))
+}
+
+prePopulateTodos()
