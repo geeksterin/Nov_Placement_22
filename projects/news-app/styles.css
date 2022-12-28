@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(128, 0, 0, 0.424);
+}
+
+.thumbnail {
+    width: 300px
+}
+
+.card {
+    border: 2px solid black;
+    padding: 4px;
+    margin: 5px auto;
+    background-color: white;
+    max-width: 500px;
+}
