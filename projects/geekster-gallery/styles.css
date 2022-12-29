@@ -1,0 +1,6 @@
+.thumbnail-custom {
+    width: 30%;
+    max-height: 200px;
+    object-fit: cover;
+    margin: 0 1%;
+}
