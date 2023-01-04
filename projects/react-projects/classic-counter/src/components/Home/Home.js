@@ -1,4 +1,6 @@
+
 import { Button } from 'antd'
+import AppLayout from '../Layout/Layout';
 
 const Home = () => (
   <div>
