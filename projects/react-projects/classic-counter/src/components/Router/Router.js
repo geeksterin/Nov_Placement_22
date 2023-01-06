@@ -1,10 +1,12 @@
 import { BrowserRouter, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Auth from "../Auth/Auth";
 import Cart from "../Cart/Cart";
 import Home from "../Home/Home";
 import AppLayout from "../Layout/Layout";
 import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 
 const Router = () => {
   return (
@@ -15,6 +17,7 @@ const Router = () => {
         <Route path={"/auth"} component={Auth} />
         <ProtectedRoute path={"/profile"} component={Profile} />
       </AppLayout>
+      <ToastContainer />
     </BrowserRouter>
   );
 };
