@@ -45,6 +45,7 @@ app.get("/profile", (req, res) => {
         state: "New York",
         country: "USA",
       },
+      avatar: "https://i.pravatar.cc/300"
     },
   });
   //   }

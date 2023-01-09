@@ -1,9 +1,35 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import {  toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../store/actions/user.action";
 
 const Auth = (props) => {
+  const dispatch = useDispatch()
+
+  const fetchProfileData = async (token) => {
+    try {
+      if(!token) {
+        toast.error("Please login!")
+        return;
+      }
+      const response = await fetch("http://localhost:4500/profile", {
+        method: "GET",
+        headers: {
+          "authorization": token
+        }
+      })
+      if(response.status === 200) {
+        const data = await response.json()
+        dispatch(setUserData(data.profile))
+      }
+
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
 
   const onLogin = async (values) => {
     console.log("Success:", values);
@@ -15,16 +41,17 @@ const Auth = (props) => {
         },
         body: JSON.stringify(values),
       });
-      const data = await response.json()
-      if(response.status === 200) {
-        localStorage.setItem("authorization", data.token)
-        props.history.push("/")
-        toast("Login Success")
+      const data = await response.json();
+      if (response.status === 200) {
+        fetchProfileData(data.token)
+        localStorage.setItem("authorization", data.token);
+        props.history.push("/");
+        toast.success("Login Success");
         return;
         // console.log(props)
       }
 
-      toast(data.message)
+      toast(data.message);
 
       // console.log(data);
     } catch (error) {
@@ -61,8 +88,6 @@ const Auth = (props) => {
       >
         <Input.Password />
       </Form.Item>
-
-
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">

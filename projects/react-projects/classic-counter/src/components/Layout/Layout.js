@@ -1,5 +1,6 @@
 import { Button, Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux"
 
 const { Header, Content, Footer } = Layout;
 
@@ -22,15 +23,10 @@ const menuItems = [
   },
 ];
 
-// new Array(15).fill(null).map((_, index) => {
-//   const key = index + 1;
-//   return {
-//     key,
-//     label: `nav ${key}`,
-//   };
-// })
-
 const AppLayout = (props) => {
+
+  const { name } = useSelector(store => store.user)
+
   return (
     <Layout className="layout">
       <Header>
@@ -49,7 +45,11 @@ const AppLayout = (props) => {
               ),
             };
           })}
+
+
         />
+
+        {/* <Button type="primary">{name}</Button> */}
       </Header>
       <Content style={{ padding: "0 50px" }}>{props.children}</Content>
       <Footer style={{ textAlign: "center" }}>
