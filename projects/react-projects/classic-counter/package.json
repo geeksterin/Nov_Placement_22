@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@redux-devtools/extension": "^3.2.4",
     "antd": "^5.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -11,7 +12,8 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

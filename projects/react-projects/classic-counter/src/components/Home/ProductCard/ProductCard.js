@@ -16,13 +16,13 @@ const ProductCard = (props) => {
 
   const dispatch = useDispatch();
 
-  const onAddToCartClick = () => dispatch(addItemToCart(props));
+  const onAddToCartClick = () => dispatch(addItemToCart({...props, quantity: 1}));
 
   return (
     <Card
       hoverable
-      style={{ width: "30%", margin: "1.5%" }}
-      cover={<img alt="example" src={image} />}
+      style={{ width: "30%", margin: "1.5%"}}
+      cover={<img alt="example" src={image}  style={{ width: "60%", objectFit: "contain" }}/>}
     >
       <Meta title={title} description={description} />
       <p>Price - INR {price}</p>

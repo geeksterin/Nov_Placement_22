@@ -1,17 +1,34 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from '@redux-devtools/extension';
+
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
 import userReducer from "./reducers/user.reducer";
 import cartReducer from "./reducers/cart.reducer";
 
-import logger from "redux-logger"
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const rootReducer =  combineReducers({
+  user: userReducer,
+  cart: cartReducer
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
 
 const store = createStore(
-  combineReducers({
-    user: userReducer,
-    cart: cartReducer
-  }),
-  applyMiddleware(logger)
+  persistedReducer,
+  composeWithDevTools()
 );
 
+
+export const persistor = persistStore(store)
 export default store;
 
 
