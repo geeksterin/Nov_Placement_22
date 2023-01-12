@@ -41,7 +41,30 @@
 // const p2 = new Promise((res, rej) => rej("p ---- 2"))
 // const p3 = new Promise((res, rej) => res("p ---- 3"))
 
+// const produtsAPi = fetch("https://jsonplaceholder.typicode.com/posts")
+// const usersApi = fetch("https://jsonplaceholder.typicode.com/users")
+// const commentsApi = fetch("https://jsonplaceholder.typicode.com/comments")
+
+
+
+// productsApi().then(data => console.log(data)).catch(err => console.log(err))
+
+
+// Promise.all([produtsAPi, usersApi, commentsApi]).then(data => console.log(data)).catch(err => console.log(err))
+
 // p1.then(data => console.log(data)).catch(err => console.log(err))
 // p2.then(data => console.log(data)).catch(err => console.log(err))
 // p3.then(data => console.log(data)).catch(err => console.log(err))
 // Promise.all([p1, p2, p3]).then(data => console.log(data)).catch(err => console.log(err))
+
+
+// async function resolveAll(){
+//    try{
+
+//       const data = await Promise.all([produtsAPi, usersApi, commentsApi])
+//       console.log(data)
+
+//    }catch(err){
+
+//    }
+// }

@@ -1,13 +1,15 @@
+import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const isLoggedIn = true;
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
+
+  const token = useSelector(store => store.auth.authorization)
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLoggedIn ? <Component {...props} /> : <Redirect to={"/"} />
+        token ? <Component {...props} /> : <Redirect to={"/auth"} />
       }
     />
   );

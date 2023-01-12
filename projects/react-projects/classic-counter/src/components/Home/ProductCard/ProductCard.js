@@ -1,5 +1,6 @@
 import { Button, Card } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { addItemToCart } from "../../../store/actions/cart.action";
 
 const { Meta } = Card;
@@ -16,7 +17,10 @@ const ProductCard = (props) => {
 
   const dispatch = useDispatch();
 
-  const onAddToCartClick = () => dispatch(addItemToCart({...props, quantity: 1}));
+  const onAddToCartClick = () => {
+    dispatch(addItemToCart({...props, quantity: 1}))
+    toast.success(`${props.title.substring(0,15)}... added to the cart`)
+  };
 
   return (
     <Card

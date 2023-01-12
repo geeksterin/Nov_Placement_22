@@ -13,7 +13,7 @@ const Router = () => {
     <BrowserRouter>
       <AppLayout>
         <Route path={"/"} component={Home} exact={true} />
-        <ProtectedRoute path={"/cart"} component={Cart} />
+        <Route path={"/cart"} component={Cart} />
         <Route path={"/auth"} component={Auth} />
         <ProtectedRoute path={"/profile"} component={Profile} />
       </AppLayout>

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../store/actions/user.action";
+import { setAuth } from "../../store/actions/auth.action";
 
 const Auth = (props) => {
   const dispatch = useDispatch()
@@ -44,7 +45,7 @@ const Auth = (props) => {
       const data = await response.json();
       if (response.status === 200) {
         fetchProfileData(data.token)
-        localStorage.setItem("authorization", data.token);
+        dispatch(setAuth(data.token))
         props.history.push("/");
         toast.success("Login Success");
         return;

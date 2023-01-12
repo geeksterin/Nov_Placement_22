@@ -20,6 +20,20 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 
       return [...cartItems]
 
+    case "DECREASE_QUANTITY":
+
+      // if(actionn)
+
+      const cartItemsDecrease = state.map(item => {
+        if(item.id === action.payload && item.quantity > 1){
+          return {...item, quantity: item.quantity - 1}
+        }
+
+        return item
+      })
+
+      return [...cartItemsDecrease]
+
     default:
       return state;
   }
