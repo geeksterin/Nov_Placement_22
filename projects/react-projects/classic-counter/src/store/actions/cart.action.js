@@ -25,3 +25,10 @@ export function decreaseQuantityByOne(id) {
         payload: id
     }
 }
+
+
+export function clearCart() {
+  return {
+    type: "CLEAR_CART"
+  }
+}

@@ -2,6 +2,7 @@ import { Button, Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { revokeAuth } from "../../store/actions/auth.action";
+import { clearCart } from "../../store/actions/cart.action";
 
 const { Header, Content, Footer } = Layout;
 
@@ -45,7 +46,10 @@ const AppLayout = (props) => {
         {
           path: "/",
           displayName: "Log out",
-          onClick: () => dispatch(revokeAuth()),
+          onClick: () => {
+            dispatch(revokeAuth())
+            dispatch(clearCart())
+          },
         },
       ];
     }

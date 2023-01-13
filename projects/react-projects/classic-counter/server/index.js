@@ -1,5 +1,8 @@
 const express = require("express");
 const { generate } = require("short-uuid");
+const Razorpay = require('razorpay');
+
+
 
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -8,6 +11,15 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+
+const instance = new Razorpay({
+  key_id: 'rzp_test_hbYCXI2cI0zN0B',
+  key_secret: 'kG0ngIx8ToqNUDPocbGylUbG',
+});
+
+
+
+
 
 app.post("/auth", (req, res) => {
   const { email, password } = req.body;
@@ -49,6 +61,27 @@ app.get("/profile", (req, res) => {
     },
   });
   //   }
+});
+
+
+app.post("/order", async (req, res) => {
+  const { amount, receipt } = req.body;
+  try {
+    const newOrder = await instance.orders.create({
+      "amount": amount,
+      "currency": "INR",
+      "receipt": receipt,
+      "notes": {
+        "key1": "value3",
+        "key2": "value2"
+      }
+    })
+    console.log("new order", newOrder);
+
+    return res.status(200).json({message: "order_id created successfully", data: newOrder})
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 app.listen(4500, () => {
