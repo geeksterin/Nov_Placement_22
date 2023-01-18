@@ -1,3 +1,10 @@
+export function setCartData(cart) {
+  return {
+    type: "SET_CART_DATA",
+    payload: cart,
+  };
+}
+
 export function addItemToCart(item) {
   return {
     type: "ADD_ITEM_TO_CART",

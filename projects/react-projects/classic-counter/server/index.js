@@ -3,6 +3,8 @@ const { generate } = require("short-uuid");
 const Razorpay = require('razorpay');
 
 
+const cartUserMapping = {}
+
 
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -20,7 +22,6 @@ const instance = new Razorpay({
 
 
 
-
 app.post("/auth", (req, res) => {
   const { email, password } = req.body;
 
@@ -33,6 +34,30 @@ app.post("/auth", (req, res) => {
 
   return res.status(400).json({
     message: "email or password is incorrect",
+  });
+});
+
+app.post("/cart", (req, res) => {
+  const { item } = req.body;
+  const { user } = req.headers;
+
+  if (!cartUserMapping[user]) {
+    cartUserMapping[user] = [];
+  }
+
+  cartUserMapping[user].push(item);
+
+  return res.status(200).json({
+    message: "item added to cart",
+    cart: cartUserMapping[user],
+  });
+});
+
+app.get("/cart", (req, res) => {
+  console.log(req.headers.user);
+  return res.status(200).json({
+    message: "cart fetched successfully",
+    cart: cartUserMapping[req.headers.user],
   });
 });
 

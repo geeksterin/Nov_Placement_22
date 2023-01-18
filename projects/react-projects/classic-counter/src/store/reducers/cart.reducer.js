@@ -2,6 +2,10 @@ const INITIAL_STATE = [];
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case "SET_CART_DATA":
+      return [...action.payload];
+
+      
     case "ADD_ITEM_TO_CART":
       return [...state, action.payload];
 

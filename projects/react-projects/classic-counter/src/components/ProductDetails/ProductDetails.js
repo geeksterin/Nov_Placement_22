@@ -12,17 +12,40 @@ const ProductDetail = () => {
   const { id } = useParams();
 
   const cartItems = useSelector((store) => store.cart);
+  const user = useSelector((store) => store.user.name);
 
   const isButtonDisabled = () => {
     const foundItem = cartItems.find((item) => item.id === product.id);
-    console.log(foundItem)
     return foundItem ? true : false;
   };
 
   const dispatch = useDispatch();
 
+  const postToCart = async () => {
+    try {
+      const response = await fetch("http://localhost:4500/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "user": user
+        },
+        body: JSON.stringify({item: { ...product, quantity: 1 }}),
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log(data);
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
   const onAddToCartClick = () => {
     dispatch(addItemToCart({ ...product, quantity: 1 }));
+
+    postToCart();
     toast.success(`${product.title.substring(0, 15)}... added to the cart`);
   };
 

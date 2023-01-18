@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../store/actions/user.action";
 import { setAuth } from "../../store/actions/auth.action";
+import { setCartData } from "../../store/actions/cart.action";
+
+
 
 const Auth = (props) => {
   const dispatch = useDispatch()
@@ -24,6 +27,7 @@ const Auth = (props) => {
       if(response.status === 200) {
         const data = await response.json()
         dispatch(setUserData(data.profile))
+        fetchCartData(data.profile.name)
       }
 
     } catch(e) {
@@ -31,6 +35,29 @@ const Auth = (props) => {
     }
   }
 
+  const fetchCartData = async (name) => {
+    try {
+      if(!name) {
+        toast.error("Please login!")
+        return;
+      }
+      const response = await fetch("http://localhost:4500/cart", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "user": name
+        }
+
+      })
+      if(response.status === 200) {
+        const data = await response.json()
+        dispatch(setCartData(data.cart))
+      }
+    }
+    catch(e) {
+      console.log(e)
+    }
+  }
 
   const onLogin = async (values) => {
     console.log("Success:", values);
